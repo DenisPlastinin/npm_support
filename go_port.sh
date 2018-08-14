@@ -11,7 +11,7 @@ ip=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' $dock_cont)
 #ip=$(/usr/bin/docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq) | grep $dock_cont | awk '{print $3}')
 
 # add NAT to iptables for access
-#/sbin/iptables -t nat -A DOCKER -p tcp --dport $rdport -j DNAT --to-destination $ip:5984
+/sbin/iptables -t nat -A DOCKER -p tcp --dport $rdport -j DNAT --to-destination $ip:5984
 
 echo "Container $dock_cont has IP= $ip"
 echo "Try to go http://NPME.DOMAIN:$rdport/registry/_all_docs"
